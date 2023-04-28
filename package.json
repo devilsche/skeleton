@@ -4,10 +4,9 @@
     "description": "Skeleton Template Language Support",
     "author": "Dominic Ruschinski",
     "license": "MIT",
-    "icon": "https://cdn-1.webcatalog.io/catalog/strato-webmail/strato-webmail-icon-128.png?v=1675595184896",
     "version": "0.0.1",
     "engines": {
-        "vscode": "^1.5.0"
+        "vscode": "^1.7.7"
     },
     "categories": [
         "Programming Languages"
