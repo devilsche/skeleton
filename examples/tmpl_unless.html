@@ -1,0 +1,65 @@
+<tmpl_unless name='foo'>
+    <p>
+        ...
+    </p>
+</tmpl_unless>
+
+<tmpl_unless foo>
+    <p>
+        ...
+    </p>
+</tmpl_unless>
+
+<tmpl_unless name='foo'>
+    <p>
+        ...
+    </p>
+<tmpl_else>
+    <p>
+        ...
+    </p>
+</tmpl_unless>
+
+<tmpl_unless foo>
+    <p>
+        ...
+    </p>
+<tmpl_else>
+    <p>
+        ...
+    </p>
+</tmpl_unless>
+
+<tmpl_unless name="foo">
+    <p>
+        ...
+    </p>
+<tmpl_else>
+    <p>
+        ...
+    </p>
+</tmpl_unless>
+
+<tmPL_unless name='foo'>
+    <p>
+        ...
+    </p>
+<tMPl_else>
+    <p>
+        ...
+    </p>
+</tmpl_unless>
+
+<tmPL_unless foo>
+    <p>
+        ...
+    </p>
+<tMPl_else>
+    <p>
+        ...
+    </p>
+</tmpl_uNLess>
+
+
+<div class='<tmpl_unless name="foo">foo</tmpl_unless>'>foo</div>
+<div class='<tmpl_unless name="foo">bar<tmpl_else>foo</tmpl_unless>'>foobar</div>

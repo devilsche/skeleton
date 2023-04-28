@@ -1,0 +1,150 @@
+{
+    "patterns": [
+        { "include": "#skeleton" },
+        { "include": "#htmltemplate" },
+        { "include": "text.html.basic" }
+    ],
+    "repository": {
+        "skeleton": {
+            "name": "skeleton",
+            "begin": "<(\\?=)",
+            "end": "(\\?)>",
+            "beginCaptures": {
+                "0": { "name": "punctuation.definition.tag.begin.skeleton" },
+                "1": { "name": "entity.name.tag.skeleton" }
+            },
+            "endCaptures": {
+                "0": { "name": "punctuation.definition.tag.end.skeleton" },
+                "1": { "name": "entity.name.tag.skeleton" }
+            },
+            "patterns": [
+                { "include": "#perl_string"	},
+                { "include": "#keywords" },
+                { "include": "#parameters" }
+            ]
+        },
+        "htmltemplate": {
+            "patterns": [
+                { "include": "#keywords_html" },
+                { "include": "#parameters_html" }
+            ]
+        },
+        "perl_string": {
+            "patterns": [{
+                "match": "(\\$)_(\\[)(\\d+)(\\])(->)",
+                "captures": {
+                    "0": { "name": "entity.other.attribute-name.html" },
+                    "5": { "name": "punctuation.definition.tag" }
+                }
+            }]
+        },
+        "keywords": {
+            "patterns": [{
+                "name": "keyword",
+                "match": "(?i)\\b(portal|lang|include_snippet|include_local_snippet|include_asset|t|j)\\b"
+
+            }]
+        },
+        "parameters": {
+            "patterns": [{
+                "name": "skeleton.parameter",
+                "begin" : "\\(",
+                "end" : "\\)",
+                "beginCaptures": {
+                    "0": { "name": "punctuation.definition.tag.begin.skeleton" }
+                },
+                "endCaptures": {
+                    "0": { "name": "punctuation.definition.tag.end.skeleton" }
+                },
+                "patterns": [
+                    { "include": "#mid" },
+                    { "include": "#strings_single_quoted" },
+                    { "include": "#strings_double_quoted" },
+                    { "include": "#keywords" }
+                ]
+            }]
+        },
+        "keywords_html": {
+            "patterns": [{
+                "begin": "(?i)(<)(\\/?tmpl_(if|else|unless|var|loop|include))",
+                "end": "(>)",
+                "beginCaptures": {
+                    "0": { "name": "keyword" },
+                    "1": { "name": "punctuation.definition.tag.begin.skeleton" },
+                    "2": { "name": "entity.name.tag.html" },
+                    "4": { "name": "keyword" }
+                },
+                "endCaptures": {
+                    "0": { "name": "punctuation.definition.tag.end.skeleton" }
+                },
+                "patterns": [
+                    { "include": "#parameters_html" },
+                    { "include": "#strings_single_quoted" },
+                    { "include": "#strings_double_quoted" }
+                ]
+            }]
+        },
+        "parameters_html": {
+            "patterns": [
+                {
+                    "match" : "(?i)(name|escape)(=)",
+                    "captures": {
+                        "1": { "name": "entity.other.attribute-name" },
+                        "2": { "name": "entity.meta.tag" }
+                    },
+                    "patterns": [
+                        { "include": "#strings_single_quoted" },
+                        { "include": "#strings_double_quoted" }
+                    ]
+                },
+                {
+                    "match": "\\s(?!name)(?!escape)([a-zA-Z0-9_]+)=",
+                    "captures": {
+                        "1": { "name": "token.error-token" }
+                    }
+                },
+                {
+                    "name": "token.error-token",
+                    "match": "[a-zA-Z0-9_]+-"
+                },
+                {
+                    "name": "string",
+                    "match": "[a-zA-Z0-9_]+"
+                }
+            ]
+        },
+        "mid": {
+            "name": "skeleton.mid",
+            "patterns": [{
+                "name": "constant.numeric",
+                "match": "\\d+"
+            }]
+        },
+        "strings_double_quoted": {
+            "name": "string",
+            "begin": "\"",
+            "end": "\"",
+            "patterns": [
+                {
+                    "include": "#skeleton"
+                },
+                {
+                    "name": "constant.character.escape.skeleton",
+                    "match": "\\\\."
+                }
+            ]
+        },
+        "strings_single_quoted": {
+            "name": "string",
+            "begin": "'",
+            "end": "'",
+            "patterns": [
+                {
+                    "name": "constant.character.escape.skeleton",
+                    "match": "\\\\."
+                }
+            ]
+        }
+    },
+    "scopeName": "source.skeleton"
+}
